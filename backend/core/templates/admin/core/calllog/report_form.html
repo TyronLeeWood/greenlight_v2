@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Download Monthly Call Log Report</h1>
+<form method="post" style="max-width: 420px;">
+    {% csrf_token %}
+    <div style="margin-top: 12px;">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="default">Download</button>
+    <a href="../" style="margin-left: 12px;">Back</a>
+</form>
+{% endblock %}

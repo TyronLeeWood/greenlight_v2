@@ -1,0 +1,7 @@
+reference_number,date,time,precinct,status,issue_type,escalation_level,escalation_timeline
+CL-20260217-P1-0004,2026-02-17,13:41:34,Test 1,OPEN,Test issue,1,L1 2026-02-17 13:42 TYRON LEE WOOD (99TYWOOD@GMAIL.COM)
+CL-20260217-P1-0005,2026-02-17,13:45:01,Test 1,OPEN,Second issue,3,L1 2026-02-17 13:44 TYRON LEE WOOD (99TYWOOD@GMAIL.COM) ; L2 2026-02-17 13:49 asd (asd@asd.asd) ; L3 2026-02-17 13:50 das (dsa@DAS.ass)
+CL-20260217-P1-0006,2026-02-17,13:51:07,Test 1,OPEN,Escelation,3,L1 2026-02-17 13:50 t (99TYWOOD@GMAIL.COM) ; L2 2026-02-17 13:50 a (asd@asd.asd) ; L3 2026-02-17 13:51 d (dsa@DAS.ass)
+CL-20260217-P1-0007,2026-02-17,14:37:18,Test 1,OPEN,TESTING CL2,3,L1 2026-02-17 14:36 TYRON LEE WOOD (99TYWOOD@GMAIL.COM) ; L2 2026-02-17 14:37 asd (asd@asd.asd) ; L3 2026-02-17 14:37 das (dsa@DAS.ass)
+CL-20260217-P1-0008,2026-02-17,14:47:02,Test 1,OPEN,Escelation,2,L1 2026-02-17 14:46 TYRON LEE WOOD (99TYWOOD@GMAIL.COM) ; L2 2026-02-17 14:46 asd (asd@asd.asd)
+CL-20260218-P1-0001,2026-02-18,07:24:54,Test 1,OPEN,Type,3,L1 2026-02-18 07:24 tyron (tyron.wood@excellerate.co.za) ; L2 2026-02-18 07:24 tim (tim@tim.tim) ; L3 2026-02-18 07:25 tom (tom@tom.tom)

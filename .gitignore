@@ -1,0 +1,77 @@
+# ==========================================
+# Core Dependencies
+# ==========================================
+node_modules/
+dist/
+build/
+.next/
+
+# ==========================================
+# Python / Django (Backend)
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local databases
+db.sqlite3
+*.sqlite3
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Django static & media uploads
+staticfiles/
+media/
+build/
+
+# Pytest / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# Node.js / React (Frontend)
+# ==========================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+
+# Vite
+.vite/
+vite.config.js.timestamp-*
+
+# ==========================================
+# OS / Editor / IDE specific
+# ==========================================
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.settings/
+*.csv
