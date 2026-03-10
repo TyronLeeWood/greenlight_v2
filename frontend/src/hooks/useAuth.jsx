@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
             })
             .catch(() => {
                 setMe(false);
-                if (location.pathname !== "/login") navigate("/login", { replace: true });
             })
             .finally(() => setBusy(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps

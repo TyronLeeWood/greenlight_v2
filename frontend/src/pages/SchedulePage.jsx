@@ -172,8 +172,31 @@ export default function SchedulePage() {
     const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
     return (
-        <>
-            <div className="card">
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/sp-schedule.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
+            </div>
+
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                 <div className="cardHeaderRow">
                     <h2 className="cardTitle">SP Schedule</h2>
                     <button className="btn primary" type="button" onClick={openNew}>
@@ -265,17 +288,17 @@ export default function SchedulePage() {
                 )}
             </div>
 
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list" style={{ marginTop: 12, position: "relative", zIndex: 1 }}>
                 {engagements.map((eng) => (
-                    <li key={eng.id} className="item noTap">
+                    <li key={eng.id} className="item noTap" style={{ backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                             <div>
                                 <div className="itemTitle">{eng.service_provider_name || `Provider #${eng.service_provider}`}</div>
-                                <div className="muted">
+                                <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>
                                     📍 {eng.precinct_name || `Precinct #${eng.precinct}`} · {eng.date} · {eng.shift}
                                 </div>
-                                {eng.contact_details && <div className="muted">📞 {eng.contact_details}</div>}
-                                {eng.call_log && <div className="muted">🔗 Call Log #{eng.call_log}</div>}
+                                {eng.contact_details && <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>📞 {eng.contact_details}</div>}
+                                {eng.call_log && <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>🔗 Call Log #{eng.call_log}</div>}
                             </div>
                             <div className="chips" style={{ marginTop: 0, flexShrink: 0 }}>
                                 <span className="chip">{eng.service_type}</span>
@@ -320,8 +343,8 @@ export default function SchedulePage() {
                         )}
                     </li>
                 ))}
-                {engagements.length === 0 && <div className="muted">No engagements found.</div>}
+                {engagements.length === 0 && <div className="muted" style={{ position: "relative", zIndex: 1, padding: "12px", backgroundColor: "rgba(11, 18, 32, 0.75)", borderRadius: "14px", backdropFilter: "blur(12px)" }}>No engagements found.</div>}
             </ul>
-        </>
+        </div>
     );
 }

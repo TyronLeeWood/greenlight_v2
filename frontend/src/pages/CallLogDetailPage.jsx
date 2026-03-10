@@ -94,15 +94,38 @@ export default function CallLogDetailPage({ onEventsChange }) {
     }
 
     return (
-        <>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/call-log.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
+            </div>
+
             {/* Main content */}
-            <div className="card">
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                 <div className="cardHeaderRow">
                     <div>
                         <h2 className="cardTitle">
                             {detail?.reference_number || `Call Log #${id}`}
                         </h2>
-                        <div className="muted">
+                        <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>
                             {detail?.date} {detail?.time?.slice(0, 5)} • {detail?.issue_type}
                         </div>
                         <div className="chips">
@@ -131,7 +154,7 @@ export default function CallLogDetailPage({ onEventsChange }) {
                 {error && <div className="error">{error}</div>}
 
                 <div className="grid2">
-                    <div className="pane">
+                    <div className="pane" style={{ backgroundColor: "rgba(11, 18, 32, 0.6)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}>
                         <h3 className="sectionTitle">Change status</h3>
                         <form className="form" onSubmit={handleUpdateStatus}>
                             <select
@@ -150,7 +173,7 @@ export default function CallLogDetailPage({ onEventsChange }) {
                         </form>
                     </div>
 
-                    <div className="pane">
+                    <div className="pane" style={{ backgroundColor: "rgba(11, 18, 32, 0.6)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}>
                         <h3 className="sectionTitle">Escalate</h3>
                         <form className="form" onSubmit={handleEscalate}>
                             <div>
@@ -184,7 +207,7 @@ export default function CallLogDetailPage({ onEventsChange }) {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

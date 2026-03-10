@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export default function LoginPage() {
-    const { login, busy } = useAuth();
+    const { login, busy, me } = useAuth();
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (me) {
+            navigate("/precincts", { replace: true });
+        }
+    }, [me, navigate]);
 
     async function handleSubmit(e) {
         e.preventDefault();

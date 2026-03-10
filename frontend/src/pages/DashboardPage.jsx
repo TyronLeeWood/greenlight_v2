@@ -32,73 +32,98 @@ export default function DashboardPage() {
     const compColor = compliance >= 80 ? "#34d399" : compliance >= 50 ? "#fbbf24" : "#f87171";
 
     return (
-        <div className="card" style={{ maxWidth: 700, margin: "0 auto" }}>
-            <div className="cardHeaderRow">
-                <h2 className="cardTitle">Dashboard</h2>
-                <select
-                    value={precinct}
-                    onChange={e => setPrecinct(e.target.value)}
-                    style={{ width: "auto", minWidth: 160 }}
-                >
-                    <option value="all">All precincts</option>
-                    {precincts.map(p => (
-                        <option key={p.id} value={p.id}>{p.name}</option>
-                    ))}
-                </select>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/Website-Header.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
             </div>
 
-            {loading && <p className="muted">Loading…</p>}
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)", maxWidth: 700, margin: "0 auto" }}>
+                <div className="cardHeaderRow">
+                    <h2 className="cardTitle">Dashboard</h2>
+                    <select
+                        value={precinct}
+                        onChange={e => setPrecinct(e.target.value)}
+                        style={{ width: "auto", minWidth: 160 }}
+                    >
+                        <option value="all">All precincts</option>
+                        {precincts.map(p => (
+                            <option key={p.id} value={p.id}>{p.name}</option>
+                        ))}
+                    </select>
+                </div>
 
-            {data && (
-                <>
-                    {/* ---- Compliance ---- */}
-                    <div className="dashCompliance">
-                        <svg viewBox="0 0 120 120" className="dashComplianceRing">
-                            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
-                            <circle
-                                cx="60" cy="60" r="52"
-                                fill="none"
-                                stroke={compColor}
-                                strokeWidth="10"
-                                strokeLinecap="round"
-                                strokeDasharray={`${(compliance / 100) * 326.73} 326.73`}
-                                transform="rotate(-90 60 60)"
-                                style={{ transition: "stroke-dasharray 0.5s ease" }}
-                            />
-                        </svg>
-                        <div className="dashComplianceText">
-                            <span className="dashComplianceNum" style={{ color: compColor }}>{compliance}%</span>
-                            <span className="dashComplianceLabel">Compliance</span>
-                        </div>
-                    </div>
+                {loading && <p className="muted">Loading…</p>}
 
-                    {/* ---- Counts ---- */}
-                    <div className="dashCards">
-                        <div className="dashCard">
-                            <div className="dashCardValue">
-                                {counts.call_logs_open ?? 0} <span className="dashCardSlash">/</span> {counts.call_logs_total ?? 0}
+                {data && (
+                    <>
+                        {/* ---- Compliance ---- */}
+                        <div className="dashCompliance">
+                            <svg viewBox="0 0 120 120" className="dashComplianceRing">
+                                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
+                                <circle
+                                    cx="60" cy="60" r="52"
+                                    fill="none"
+                                    stroke={compColor}
+                                    strokeWidth="10"
+                                    strokeLinecap="round"
+                                    strokeDasharray={`${(compliance / 100) * 326.73} 326.73`}
+                                    transform="rotate(-90 60 60)"
+                                    style={{ transition: "stroke-dasharray 0.5s ease" }}
+                                />
+                            </svg>
+                            <div className="dashComplianceText">
+                                <span className="dashComplianceNum" style={{ color: compColor }}>{compliance}%</span>
+                                <span className="dashComplianceLabel">Compliance</span>
                             </div>
-                            <div className="dashCardLabel">Open Call Logs</div>
                         </div>
-                        <div className="dashCard">
-                            <div className="dashCardValue">
-                                {counts.tasks_open ?? 0} <span className="dashCardSlash">/</span> {counts.tasks_total ?? 0}
-                            </div>
-                            <div className="dashCardLabel">Open Tasks</div>
-                        </div>
-                        <div className="dashCard">
-                            <div className="dashCardValue">
-                                {counts.items_open ?? 0} <span className="dashCardSlash">/</span> {counts.items_total ?? 0}
-                            </div>
-                            <div className="dashCardLabel">Items Open</div>
-                        </div>
-                    </div>
 
-                    <p className="muted" style={{ textAlign: "center", marginTop: 14, fontSize: 12 }}>
-                        Compliance = completed items ÷ total items. A call log is complete when Resolved or Closed. A task is complete when Done.
-                    </p>
-                </>
-            )}
+                        {/* ---- Counts ---- */}
+                        <div className="dashCards">
+                            <div className="dashCard">
+                                <div className="dashCardValue">
+                                    {counts.call_logs_open ?? 0} <span className="dashCardSlash">/</span> {counts.call_logs_total ?? 0}
+                                </div>
+                                <div className="dashCardLabel">Open Call Logs</div>
+                            </div>
+                            <div className="dashCard">
+                                <div className="dashCardValue">
+                                    {counts.tasks_open ?? 0} <span className="dashCardSlash">/</span> {counts.tasks_total ?? 0}
+                                </div>
+                                <div className="dashCardLabel">Open Tasks</div>
+                            </div>
+                            <div className="dashCard">
+                                <div className="dashCardValue">
+                                    {counts.items_open ?? 0} <span className="dashCardSlash">/</span> {counts.items_total ?? 0}
+                                </div>
+                                <div className="dashCardLabel">Items Open</div>
+                            </div>
+                        </div>
+
+                        <p className="muted" style={{ textAlign: "center", marginTop: 14, fontSize: 12 }}>
+                            Compliance = completed items ÷ total items. A call log is complete when Resolved or Closed. A task is complete when Done.
+                        </p>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

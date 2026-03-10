@@ -86,78 +86,103 @@ export default function CallLogNewPage() {
     }
 
     return (
-        <div className="card">
-            <div className="cardHeaderRow">
-                <h2 className="cardTitle">Create Call Log</h2>
-                <button
-                    className="btn ghost"
-                    type="button"
-                    onClick={() => navigate(-1)}
-                >
-                    Back
-                </button>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/call-log.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
             </div>
 
-            {error && <div className="error">{error}</div>}
-
-            <form className="form" onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
-                <div>
-                    <div className="label">Precinct *</div>
-                    <select
-                        value={clPrecinct}
-                        onChange={(e) => setClPrecinct(e.target.value)}
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
+                <div className="cardHeaderRow">
+                    <h2 className="cardTitle">Create Call Log</h2>
+                    <button
+                        className="btn ghost"
+                        type="button"
+                        onClick={() => navigate(-1)}
                     >
-                        <option value="">-- select a precinct --</option>
-                        {precincts.map((p) => (
-                            <option key={p.id} value={String(p.id)}>
-                                {p.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <div className="label">Date</div>
-                    <input
-                        type="date"
-                        value={clDate}
-                        onChange={(e) => setClDate(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <div className="label">Time</div>
-                    <input
-                        type="time"
-                        value={clTime.slice(0, 5)}
-                        onChange={(e) => setClTime(`${e.target.value}:00`)}
-                    />
-                </div>
-                <div>
-                    <div className="label">Issue type *</div>
-                    <input
-                        value={clIssueType}
-                        onChange={(e) => setClIssueType(e.target.value)}
-                        placeholder="Describe the issue..."
-                    />
-                </div>
-                <div>
-                    <div className="label">Status</div>
-                    <select
-                        value={clStatus}
-                        onChange={(e) => setClStatus(e.target.value)}
-                    >
-                        {STATUS_OPTIONS.map((s) => (
-                            <option key={s.value} value={s.value}>
-                                {s.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div style={{ marginTop: "1rem" }}>
-                    <button className="btn primary" type="submit" disabled={busy}>
-                        {busy ? "Saving..." : "Create Call Log"}
+                        Back
                     </button>
                 </div>
-            </form>
+
+                {error && <div className="error">{error}</div>}
+
+                <form className="form" onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+                    <div>
+                        <div className="label">Precinct *</div>
+                        <select
+                            value={clPrecinct}
+                            onChange={(e) => setClPrecinct(e.target.value)}
+                        >
+                            <option value="">-- select a precinct --</option>
+                            {precincts.map((p) => (
+                                <option key={p.id} value={String(p.id)}>
+                                    {p.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <div className="label">Date</div>
+                        <input
+                            type="date"
+                            value={clDate}
+                            onChange={(e) => setClDate(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <div className="label">Time</div>
+                        <input
+                            type="time"
+                            value={clTime.slice(0, 5)}
+                            onChange={(e) => setClTime(`${e.target.value}:00`)}
+                        />
+                    </div>
+                    <div>
+                        <div className="label">Issue type *</div>
+                        <input
+                            value={clIssueType}
+                            onChange={(e) => setClIssueType(e.target.value)}
+                            placeholder="Describe the issue..."
+                        />
+                    </div>
+                    <div>
+                        <div className="label">Status</div>
+                        <select
+                            value={clStatus}
+                            onChange={(e) => setClStatus(e.target.value)}
+                        >
+                            {STATUS_OPTIONS.map((s) => (
+                                <option key={s.value} value={s.value}>
+                                    {s.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div style={{ marginTop: "1rem" }}>
+                        <button className="btn primary" type="submit" disabled={busy}>
+                            {busy ? "Saving..." : "Create Call Log"}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

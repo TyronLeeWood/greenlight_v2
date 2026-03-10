@@ -6,6 +6,7 @@ import SidebarPrecinctList from "./components/SidebarPrecinctList";
 import SidebarCallLogFilters from "./components/SidebarCallLogFilters";
 import SidebarEscalationTimeline from "./components/SidebarEscalationTimeline";
 import LoginPage from "./pages/LoginPage";
+import LandingPage from "./pages/LandingPage";
 import PrecinctsPage from "./pages/PrecinctsPage";
 import PrecinctDetailPage from "./pages/PrecinctDetailPage";
 import CallLogsPage from "./pages/CallLogsPage";
@@ -132,6 +133,7 @@ export default function App() {
     <div className="appWrap">
       <div className="app">
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/*"

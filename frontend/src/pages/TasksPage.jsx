@@ -154,8 +154,31 @@ export default function TasksPage() {
     const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
     return (
-        <>
-            <div className="card">
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/tasks.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
+            </div>
+
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                 <div className="cardHeaderRow">
                     <h2 className="cardTitle">Tasks</h2>
                     <button className="btn primary" type="button" onClick={openNew}>
@@ -237,18 +260,18 @@ export default function TasksPage() {
                 )}
             </div>
 
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list" style={{ marginTop: 12, position: "relative", zIndex: 1 }}>
                 {tasks.map((t) => (
-                    <li key={t.id} className="item noTap">
+                    <li key={t.id} className="item noTap" style={{ backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                             <div>
                                 <div className="itemTitle">{t.task_type || `Task #${t.id}`}</div>
-                                <div className="muted">
+                                <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>
                                     📍 {t.precinct_name || `Precinct #${t.precinct}`}
                                     {t.call_log && <> · 🔗 CL #{t.call_log}</>}
                                     {t.service_provider_engagement && <> · ⚙️ Eng #{t.service_provider_engagement}</>}
                                 </div>
-                                {t.description && <div className="muted">{t.description}</div>}
+                                {t.description && <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>{t.description}</div>}
                                 {t.sharepoint_link && (
                                     <div style={{ marginTop: 4 }}>
                                         <a href={t.sharepoint_link} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "var(--accent)", textDecoration: "none" }}>
@@ -256,7 +279,7 @@ export default function TasksPage() {
                                         </a>
                                     </div>
                                 )}
-                                <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>
+                                <div className="muted" style={{ fontSize: 11, marginTop: 4, color: "rgba(255,255,255,0.72)" }}>
                                     Created {t.created_at?.slice(0, 10)} {t.created_by_username && `by ${t.created_by_username}`}
                                     {t.due_date && <> · 📅 Due {t.due_date}</>}
                                 </div>
@@ -271,8 +294,8 @@ export default function TasksPage() {
                         </div>
                     </li>
                 ))}
-                {tasks.length === 0 && <div className="muted">No tasks found.</div>}
+                {tasks.length === 0 && <div className="muted" style={{ position: "relative", zIndex: 1, padding: "12px", backgroundColor: "rgba(11, 18, 32, 0.75)", borderRadius: "14px", backdropFilter: "blur(12px)" }}>No tasks found.</div>}
             </ul>
-        </>
+        </div>
     );
 }

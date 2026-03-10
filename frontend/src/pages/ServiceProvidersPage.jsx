@@ -102,8 +102,31 @@ export default function ServiceProvidersPage() {
     const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
     return (
-        <>
-            <div className="card">
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/service-providers.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
+            </div>
+
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                 <div className="cardHeaderRow">
                     <h2 className="cardTitle">Service Providers</h2>
                     <button className="btn primary" type="button" onClick={openNew}>
@@ -170,13 +193,13 @@ export default function ServiceProvidersPage() {
                 )}
             </div>
 
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list" style={{ marginTop: 12, position: "relative", zIndex: 1 }}>
                 {filtered.map((sp) => (
-                    <li key={sp.id} className="item noTap">
+                    <li key={sp.id} className="item noTap" style={{ backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                             <div>
                                 <div className="itemTitle">{sp.company}</div>
-                                <div className="muted">
+                                <div className="muted" style={{ color: "rgba(255,255,255,0.72)" }}>
                                     {sp.primary_contact_name && <>{sp.primary_contact_name} · </>}
                                     {sp.email && <>{sp.email} · </>}
                                     {sp.phone}
@@ -192,8 +215,8 @@ export default function ServiceProvidersPage() {
                         </div>
                     </li>
                 ))}
-                {filtered.length === 0 && <div className="muted">No providers found.</div>}
+                {filtered.length === 0 && <div className="muted" style={{ position: "relative", zIndex: 1, padding: "12px", backgroundColor: "rgba(11, 18, 32, 0.75)", borderRadius: "14px", backdropFilter: "blur(12px)" }}>No providers found.</div>}
             </ul>
-        </>
+        </div>
     );
 }

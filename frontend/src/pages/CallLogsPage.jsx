@@ -73,11 +73,55 @@ export default function CallLogsPage() {
     ];
 
     return (
-        <>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            minHeight: "100%",
+        }}>
+            {/* Full-screen Background that escapes the layout container */}
+            <div style={{
+                position: "fixed",
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: "url('/call-log.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1
+            }}>
+                {/* Dark overlay */}
+                <div style={{
+                    position: "absolute",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: "rgba(11, 18, 32, 0.65)"
+                }} />
+            </div>
+
+            {/* Instruction card */}
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
+                <div className="cardHeaderRow" style={{ alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
+                    <div style={{ flex: "1 1 auto" }}>
+                        <h2 className="cardTitle">Call Logs</h2>
+                        <div className="divider" style={{ margin: "8px 0" }} />
+                        <div className="muted" style={{ color: "#e2e8f0" }}>
+                            Use the sidebar to search and filter call logs, then click one to view details.
+                        </div>
+                    </div>
+                    <button
+                        className="btn primary"
+                        type="button"
+                        style={{ whiteSpace: "nowrap" }}
+                        onClick={() => window.location.href = "/calllogs/new"}
+                    >
+                        + Call Log
+                    </button>
+                </div>
+            </div>
+
             {/* Download report section */}
-            <div className="card">
+            <div className="card" style={{ zIndex: 1, position: "relative", backgroundColor: "rgba(11, 18, 32, 0.75)", border: "1px solid rgba(255, 255, 255, 0.15)", backdropFilter: "blur(12px)" }}>
                 <h2 className="cardTitle">📊 Download Monthly Report</h2>
-                <div className="muted" style={{ marginTop: 4 }}>
+                <div className="muted" style={{ marginTop: 4, color: "#e2e8f0" }}>
                     Export call logs for a given month as CSV or PDF.
                 </div>
 
@@ -133,27 +177,6 @@ export default function CallLogsPage() {
                     </button>
                 </form>
             </div>
-
-            {/* Instruction card */}
-            <div className="card">
-                <div className="cardHeaderRow" style={{ alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
-                    <div style={{ flex: "1 1 auto" }}>
-                        <h2 className="cardTitle">Call Logs</h2>
-                        <div className="divider" style={{ margin: "8px 0" }} />
-                        <div className="muted">
-                            Use the sidebar to search and filter call logs, then click one to view details.
-                        </div>
-                    </div>
-                    <button
-                        className="btn primary"
-                        type="button"
-                        style={{ whiteSpace: "nowrap" }}
-                        onClick={() => window.location.href = "/calllogs/new"}
-                    >
-                        + Call Log
-                    </button>
-                </div>
-            </div>
-        </>
+        </div>
     );
 }
